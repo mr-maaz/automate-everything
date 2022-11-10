@@ -1,0 +1,25 @@
+# Author: Ardit Sulce, Automate Everything with Python, Udemy
+# Course URL: https://www.udemy.com/course/automate-everything-with-python/
+
+import cv2
+import numpy as np
+
+foreground = cv2.imread("giraffe.jpeg")
+background = cv2.imread("safari.jpeg")
+
+print(foreground[40, 40])
+width = foreground.shape[1]
+height = foreground.shape[0]
+print(foreground.shape)
+
+
+resized_background = cv2.resize(background, (width, height))
+
+for i in range(width):
+  for j in range(height):
+    pixel = foreground[j, i]
+    # print(type(pixel))
+    if np.any(pixel == [1, 255, 0]):
+      foreground[j, i] = resized_background[j, i]
+
+cv2.imwrite('output.jpeg', foreground)
